@@ -52,7 +52,7 @@ header {
 }
 
 #inner-container {
-    margin-top: 60px;
+    margin-top: 20px;
     width: 700px;
 }
 
@@ -72,17 +72,12 @@ header {
 #left input, #right input{
     font-size: 24px;
     text-align: center;
-}
-
-#left-img, #right-img {
-    width: 200px;
-    display: inline-block;
-    margin-left: 120px;  
+    margin-bottom: 20px;
 }
 
 #btn-fight {
     position: relative;
-    left: 45%;
+    left: 44%;
     font-size: 24px;
     padding: 10px;
     border-radius: 10px;
@@ -96,4 +91,52 @@ header {
     cursor: pointer;
     transition: all 0.3s ease;
     transform: scale(1.1);
+}
+
+#positioning {
+    display: flex;
+    justify-content: space-around;
+    margin-top: -260px;
+}
+
+#positioning h2 {
+    text-align: center;
+    margin-top: 10px;
+    color: white;
+    font-size: 24px;
+}
+
+#positioning p {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    color: white;
+}
+
+#live-battle {
+    background-image: url(assets/arena.jpg);
+    width: 600px;
+    height: 330px;
+    margin: auto;
+    border-radius: 20px;
+    border: 2px solid black;
+    box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.8);
+}
+
+#left-stats, 
+#right-stats {
+    height: 300px;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    border: 3px solid black;
+}
+
+#left-stats {
+    margin-left: 100px;
+}
+
+#right-stats {
+    margin-right: 100px;
 }
