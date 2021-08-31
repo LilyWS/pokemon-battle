@@ -5,67 +5,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PBS</title>
+    <title>PokeBattle Simulator | FIGHT</title>
     <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="battlepage.css"">
 </head>
 
 <body>
-    <div class="pokemon-battle">
-        <div class="pokemon-body">
-            Pokemon-Battle
-        </div>
-    </div>
-    <div class="current-city" style="width: 18rem;">
-        <img src="https://upload.wikimedia.org/wikipedia/en/7/72/Pok%C3%A9mon_Black_and_White_logo.png"
-            class="city-img-top" alt="battle-logo">
-        <div class="city-body">
-            <p class="card-text">Your Current Location: </p>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="choice-of-pokemon">
-                <div class="card-body">
-                    <h5 class="card-title">Player 1 Pokemon: </h5>
-                    <h5 class="card-title">Score: </h5>
-                    <div class="card-img">
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/7.png"
-                            class="pokemon-choice" alt="Squirttle">
+    <div id="container">
+        <header>New battle? You know what to do!</header>
+        <form action="./battle.html" method="GET">
+            <input id="city-finder" type="text" value="" name="loc" placeholder="Search any City"><button id="current-loc"></button>
+                <div id="inner-container">
+                    <div id="left">
+                        <input id="left-input" type="text" value="" name="p1" placeholder="Choose Player 1">
+                        <input id="right-input" type="text" value="" name="p2" placeholder="Choose Player 2">
                     </div>
-                    <a href="#" class="btn btn-primary">Attack</a>
                 </div>
-            </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="choice-of-pokemon">
-                <div class="card-body">
-                    <h5 class="card-title">Player 2 Pokemon: </h5>
-                    <div class="card-img">
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-                            class="pokemon-choice" alt="Bulbasuar">
-                    </div>
-                    <a href="#" class="btn btn-primary">Attack</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="score-card">
-                <div class="card-body">
-                    <h5 class="card-title">Score: </h5>
-                </div>
-            </div>
-        </div>
-
+            <button type="submit" id="btn-fight">Fight!</button>        
+        </form>
     </div>
 
-    </div>
-    </div>
+        <main id="positioning">
+            <div id="left-stats">
+                <h2 id="left-pokemon-name">Pokemon 1</h2>
+                <p id="attack1" class="hp-remaining">Ouch HP: 80/100</p>
+                <p id="attack1" class="hp-remaining">Oof HP: 35/100</p>
+                <p id="attack1" class="hp-remaining">Argh HP: 0/100</p>
+            </div>
 
-    </div>
+            <div id="live-battle">
+                <img id="p1Img"/>
+                <img id="p2Img"/>
+            </div>
+
+            <div id="right-stats">
+                <h2 id="right-pokemon-name">Pokemon 2</h2>
+                <p id="attack1" class="hp-remaining">Oww HP: 92/100</p>
+                <p id="attack1" class="hp-remaining">Argh HP: 57/100</p>
+                <p id="attack1" class="hp-remaining"></p>
+            </div>
+        </main>
+
     <script src="script.js"></script>
 </body>
 
