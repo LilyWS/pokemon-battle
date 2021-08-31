@@ -15,7 +15,9 @@ var pokeURL2 = `https://pokeapi.co/api/v2/pokemon/${pokemon2}/`;
 //following code is tempory until better id's get assigned to pokemon slots
 var pokeCards = document.querySelectorAll(".choice-of-pokemon");
 
+//order is the same as pokemon array but order by speed instead of player. pokemon is used for rendering and order for logic
 var order =[];//order in which pokemon will take turns
+var battleTimer;
 
 function getPokemon(url, url2) {
     fetch(url)
@@ -69,15 +71,6 @@ function createPokemon(data, pokeIndex){ //pokeIndex is which index of the pokem
     }
 }
 
-function initBattle(){ //set up the battle 
-    let p1 = pokemon[0];
-    let p2 = pokemon[1];
-    order = (p1.spd>p2.spd) ? [p1, p2] : [p2, p1];
-    p1.using = (p1.sAtk > p1.atk) ? 'sAtk' : 'atk';
-    p2.using = (p2.sAtk > p2.atk) ? 'sAtk' : 'atk';
-    battleStep();
-}
-
 /*
 battles wil take place turn by turn
 a turn comprises of both mon attacking
@@ -88,10 +81,35 @@ the damgage given will follow the following formula:
 (Attack of pokemon/Defense of other pokemon)*(Math.random()*.15+.85)*(damage mutliplier from type interaction)
 */
 
-function battleStep() { //function to process one step of the battle (a turn for both players)
+function initBattle(){ //set up the battle 
     let p1 = pokemon[0];
     let p2 = pokemon[1];
-    console.log(p1[p1['using']])
+    order = (p1.spd>p2.spd) ? [p1, p2] : [p2, p1];
+    //determine what the pokemon will attack and defend with
+    p1.using = (p1.sAtk > p1.atk) ? 'sAtk' : 'atk';
+    p2.defWith = (p1.using=='sAtk') ? p2.sDef : p2.def;
+    p2.using = (p2.sAtk > p2.atk) ? 'sAtk' : 'atk';
+    p1.defWith = (p2.using=='sAtk') ? p1.sDef : p1.def;
+    battleTimer = setInterval(battleStep, 250);
+}
+
+function battleStep() { //function to process one step of the battle (a turn for both players)
+    for(let i=0;i<order.length;i++){
+        let p1 = order[i]; //in this context p1 is the currently attacking pokemon and p2 is the defending one
+        let p2 = (i) ? order[0]:order[1];
+        let dmgVal = Math.round(((p1[p1.using]/p2.defWith) * (Math.random()*.15 + .85) * 1)*10) / 10 //1 will become type multiplier later. we also round damage to one decimal place
+        p2.cHp = Math.round((p2.cHp - dmgVal) *10)/10; //we round to tenths place because javascript sucks at floating point numbers
+        
+        if(p2.cHp < .1){
+            console.log(`${p2.name} is hit for ${dmgVal} and faints!`);
+            console.log(`${p1.name} had ${p1.cHp} HP left.`);
+            clearInterval(battleTimer);
+            break;
+        }
+        console.log(`${p2.name} is hit for ${dmgVal}!`);
+        console.log(`The have ${p2.cHp} HP left!`);
+    }
+
 }
 
 function renderPokemon(){
