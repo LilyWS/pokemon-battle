@@ -15,6 +15,8 @@ var pokeURL2 = `https://pokeapi.co/api/v2/pokemon/${pokemon2}/`;
 //following code is tempory until better id's get assigned to pokemon slots
 var pokeCards = document.querySelectorAll(".choice-of-pokemon");
 
+var order =[];//order in which pokemon will take turns
+
 function getPokemon(url, url2) {
     fetch(url)
     .then(function (response) {
@@ -61,15 +63,39 @@ function createPokemon(data, pokeIndex){ //pokeIndex is which index of the pokem
         sDef: data.stats[4].base_stat,
         spd: data.stats[5].base_stat,
     }
-    renderPokemon()
+    if (pokemon[0] && pokemon[1]){ //check if both pokemon are loaded
+        renderPokemon()
+        initBattle()
+    }
 }
+
+function initBattle(){ //set up the battle 
+    let p1 = pokemon[0];
+    let p2 = pokemon[1];
+    order = (p1.spd>p2.spd) ? [p1, p2] : [p2, p1];
+    p1.using = (p1.sAtk > p1.atk) ? 'sAtk' : 'atk';
+    p2.using = (p2.sAtk > p2.atk) ? 'sAtk' : 'atk';
+    battleStep();
+}
+
+/*
+battles wil take place turn by turn
+a turn comprises of both mon attacking
+the faster one will go first 
+they will use either atk or special atk, whichever is higher 
+the other pokemon will defened with their corresponding defense stat
+the damgage given will follow the following formula:
+(Attack of pokemon/Defense of other pokemon)*(Math.random()*.15+.85)*(damage mutliplier from type interaction)
+*/
 
 function battleStep() { //function to process one step of the battle (a turn for both players)
     let p1 = pokemon[0];
     let p2 = pokemon[1];
+    console.log(p1[p1['using']])
 }
 
 function renderPokemon(){
+    console.log(pokemon);
     let pokeImages = [pokemon[0].spriteBack, pokemon[1].spriteForward];
     for(let i=0; i<pokeCards.length;i++){ //loop through each pokemon display and update it visually
         pokeCards[i].querySelector("img").setAttribute("src", pokeImages[i])
