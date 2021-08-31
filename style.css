@@ -1,0 +1,62 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background: url(./assets/ashpaul.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#container {
+    border-radius: 25px;
+    width: 750px;
+    height: 500px;
+    margin: auto;
+    margin-top: 100px;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding-top: 20px;
+}
+
+header {
+    text-align: center;
+    font-size: 36px;
+    margin: 0 20px 0 20px;
+}
+
+#city-finder {
+    position: relative;
+    left: 30%;
+    top: 5%;
+    font-size: 24px;
+    text-align: center;
+}
+
+#inner-container {
+    margin-top: 60px;
+    width: 700px;
+}
+
+#left-input, #right-input {
+    display: inline-block;
+    margin-left: 50px;  
+}
+
+#left input, #right input{
+    font-size: 24px;
+    text-align: center;
+}
+
+#left-img, #right-img {
+    width: 200px;
+    display: inline-block;
+    margin-left: 120px;  
+}
+
+#btn-fight {
+    position: relative;
+    left: 50%;
+}
