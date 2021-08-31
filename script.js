@@ -13,7 +13,7 @@ var pokeURL1 = `https://pokeapi.co/api/v2/pokemon/${pokemon1}/`;
 var pokeURL2 = `https://pokeapi.co/api/v2/pokemon/${pokemon2}/`;
 
 //following code is tempory until better id's get assigned to pokemon slots
-var pokeCards = document.querySelectorAll(".choice-of-pokemon");
+var pokeCards = document.querySelector("#live-battle");
 
 //order is the same as pokemon array but order by speed instead of player. pokemon is used for rendering and order for logic
 var order =[];//order in which pokemon will take turns
@@ -90,7 +90,7 @@ function initBattle(){ //set up the battle
     p2.defWith = (p1.using=='sAtk') ? p2.sDef : p2.def;
     p2.using = (p2.sAtk > p2.atk) ? 'sAtk' : 'atk';
     p1.defWith = (p2.using=='sAtk') ? p1.sDef : p1.def;
-    battleTimer = setInterval(battleStep, 250);
+    //battleTimer = setInterval(battleStep, 250);
 }
 
 function battleStep() { //function to process one step of the battle (a turn for both players)
@@ -115,8 +115,8 @@ function battleStep() { //function to process one step of the battle (a turn for
 function renderPokemon(){
     console.log(pokemon);
     let pokeImages = [pokemon[0].spriteBack, pokemon[1].spriteForward];
-    for(let i=0; i<pokeCards.length;i++){ //loop through each pokemon display and update it visually
-        pokeCards[i].querySelector("img").setAttribute("src", pokeImages[i])
+    for(let i=0; i<pokeCards.querySelectorAll("img").length;i++){ //loop through each pokemon display and update it visually
+        pokeCards.querySelectorAll("img")[i].setAttribute("src", pokeImages[i])
     }
     
 }
