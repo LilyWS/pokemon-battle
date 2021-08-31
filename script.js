@@ -38,13 +38,14 @@ function getPokemon(url, url2) {
     });
 }
 
-function getType(url) {
+function getType(url, pokeIndex) {
     fetch(url)
     .then(function (response) {
         return response.json();
       })
     .then(function (data) {
         console.log(data);
+        pokemon[pokeIndex].typeData = data;
         return(data);
     });
 }
@@ -57,6 +58,7 @@ function createPokemon(data, pokeIndex){ //pokeIndex is which index of the pokem
         name: data.name,
         spriteBack: data.sprites.back_default,
         spriteForward: data.sprites.front_default,
+        type: data.types[0].type.name,
         mHp: data.stats[0].base_stat, //max hp
         cHp: data.stats[0].base_stat, //current hp
         atk: data.stats[1].base_stat,
@@ -84,12 +86,16 @@ the damgage given will follow the following formula:
 function initBattle(){ //set up the battle 
     let p1 = pokemon[0];
     let p2 = pokemon[1];
+    getType(`https://pokeapi.co/api/v2/type/${p1.type}/`, 0);
+    getType(`https://pokeapi.co/api/v2/type/${p2.type}/`, 1);
     order = (p1.spd>p2.spd) ? [p1, p2] : [p2, p1];
     //determine what the pokemon will attack and defend with
     p1.using = (p1.sAtk > p1.atk) ? 'sAtk' : 'atk';
     p2.defWith = (p1.using=='sAtk') ? p2.sDef : p2.def;
     p2.using = (p2.sAtk > p2.atk) ? 'sAtk' : 'atk';
     p1.defWith = (p2.using=='sAtk') ? p1.sDef : p1.def;
+    //determine how type will multiply their attacks
+    //p1.multiplier = 
     //battleTimer = setInterval(battleStep, 250);
 }
 
