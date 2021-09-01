@@ -123,6 +123,7 @@ header {
     box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.8);
 }
 
+/* bottom left pokemon img*/
 #p1Img {
     position: relative;
     top: 120px;
@@ -130,6 +131,13 @@ header {
     width: 200px;
 }
 
+/*if pokemon doesnt have back sprite, flips front sprite*/
+.flip-front-back {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+/*top right pokemon img*/
 #p2Img {
     position: relative;
     top: 30px;
@@ -137,19 +145,23 @@ header {
     width: 200px;
 }
 
-.attack1:hover {
+/*attack effect for bottom left poke*/
+.attack1 {
     transform: rotate(8deg);
 }
 
-.attack2:hover {
+/*attack effect for top right poke*/
+.attack2 {
     transform: rotate(-8deg);
 }
 
-.hit:hover {
+/*effect when attacked by opp, shrinks a little*/
+.hit {
     transform: scale(0.8);
 }
 
-.ko:hover {
+/*when lost in battle, opacity is halfed*/
+.ko {
     opacity: 0.5;
 }
 
