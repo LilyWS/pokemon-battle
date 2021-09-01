@@ -13,6 +13,7 @@ var pokemon1= (parameters.get("p1")) ? parameters.get("p1").toLowerCase() : "squ
 var pokemon2= (parameters.get("p2")) ? parameters.get("p2").toLowerCase() : "bulbasaur";
 
 var weatherURL =  `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPIKey}`;
+var environmentStats = {};
 
 var pokemon = []; //will contain objects representing pokemon 1 and 2
 var pokeURL1 = `https://pokeapi.co/api/v2/pokemon/${pokemon1}/`;
@@ -32,8 +33,15 @@ function getWeather(url) {
       })
     .then(function (data) {
         console.log(data);
+        setWeather(data);
         return data;
     });
+}
+
+function setWeather(data){
+    environmentStats.weatherType = data.weather[0].main;
+    environmentStats.time = moment(moment.utc()).add(data.timezone, 'seconds').format('H:mm');
+    console.log(environmentStats)
 }
 
 function getPokemon(url, url2) {
