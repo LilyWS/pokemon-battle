@@ -172,6 +172,7 @@ function battleStep() { //function to process one step of the battle (a turn for
 
 function renderPokemon() {
     console.log(pokemon);
+    
     let pokeImages = [pokemon[0].spriteBack, pokemon[1].spriteForward];
     for (let i = 0; i < pokeCards.querySelectorAll("img").length; i++) { //loop through each pokemon display and update it visually
         pokeCards.querySelectorAll("img")[i].setAttribute("src", pokeImages[i]) 
