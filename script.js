@@ -10,6 +10,7 @@ var weatherAPIKey = 'e93a9a6062496e0d1483164567d29081';
 //CONVERT TO LOWER
 var pokemon1= (parameters.get("p1")) ? parameters.get("p1") : "squirtle";
 var pokemon2= (parameters.get("p2")) ? parameters.get("p2") : "bulbasaur";
+
 var pokemon = []; //will contain objects representing pokemon 1 and 2
 var pokeURL1 = `https://pokeapi.co/api/v2/pokemon/${pokemon1}/`;
 var pokeURL2 = `https://pokeapi.co/api/v2/pokemon/${pokemon2}/`;
@@ -18,26 +19,26 @@ var pokeURL2 = `https://pokeapi.co/api/v2/pokemon/${pokemon2}/`;
 var pokeCards = document.querySelector("#live-battle");
 
 //order is the same as pokemon array but order by speed instead of player. pokemon is used for rendering and order for logic
-var order =[];//order in which pokemon will take turns
+var order = [];//order in which pokemon will take turns
 var battleTimer;
 
 function getPokemon(url, url2) {
     fetch(url)
-    .then(function (response) {
-        return response.json();
-      })
-    .then(function (data) {
-        console.log(data);
-        createPokemon(data, 0);
-    });
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            createPokemon(data, 0);
+        });
     fetch(url2)
-    .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-        createPokemon(data, 1);
-    });
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            createPokemon(data, 1);
+        });
 }
 
 function getType(url, url2) {
@@ -61,7 +62,7 @@ function getType(url, url2) {
     });
 }
 
-function createPokemon(data, pokeIndex){ //pokeIndex is which index of the pokemon array we're accessing 
+function createPokemon(data, pokeIndex) { //pokeIndex is which index of the pokemon array we're accessing 
     //we have to do a second api call to get the specification of their type and how it relates to other types
     //let typeUrl = `https://pokeapi.co/api/v2/type/${}/`;
     //let typeData = getType()
@@ -69,7 +70,7 @@ function createPokemon(data, pokeIndex){ //pokeIndex is which index of the pokem
     //TODO: catch edge cases where the pokemon has no back sprite or front sprite
     pokemon[pokeIndex] = {
         name: data.name,
-        spriteBack: data.sprites.back_default,
+        spriteBack: (!data.sprites.back_default) ? data.sprites.front_default : data.sprites.back_default,
         spriteForward: data.sprites.front_default,
         type: data.types[0].type.name,
         mHp: data.stats[0].base_stat, //max hp
@@ -80,6 +81,7 @@ function createPokemon(data, pokeIndex){ //pokeIndex is which index of the pokem
         sDef: data.stats[4].base_stat,
         spd: data.stats[5].base_stat,
     }
+
     if (pokemon[0] && pokemon[1]){ //check if both pokemon are loaded
         getType(`https://pokeapi.co/api/v2/type/${pokemon[0].type}/`, `https://pokeapi.co/api/v2/type/${pokemon[1].type}/`);
         renderPokemon()
@@ -102,13 +104,13 @@ the damgage given will follow the following formula:
 (Attack of pokemon/Defense of other pokemon)*(Math.random()*.15+.85)*(damage mutliplier from type interaction)
 */
 
-function initBattle(){ //set up the battle 
+function initBattle() { //set up the battle 
     let p1 = pokemon[0];
     let p2 = pokemon[1];
     order = (p1.spd>p2.spd) ? [p1, p2] : [p2, p1];
     //determine what stat the pokemon will attack and defend with
     p1.using = (p1.sAtk > p1.atk) ? 'sAtk' : 'atk';
-    p2.defWith = (p1.using=='sAtk') ? p2.sDef : p2.def;
+    p2.defWith = (p1.using == 'sAtk') ? p2.sDef : p2.def;
     p2.using = (p2.sAtk > p2.atk) ? 'sAtk' : 'atk';
     p1.defWith = (p2.using=='sAtk') ? p1.sDef : p1.def;
     //determine how type will multiply their attacks
@@ -129,7 +131,7 @@ function getAtkMult(dmgRelations, targetType){
 }
 
 function battleStep() { //function to process one step of the battle (a turn for both players)
-    for(let i=0;i<order.length;i++){
+    for (let i = 0; i < order.length; i++) {
         let p1 = order[i]; //in this context p1 is the currently attacking pokemon and p2 is the defending one
         let p2 = (i) ? order[0]:order[1];
         let dmgVal = Math.round(((p1[p1.using]/p2.defWith) * (Math.random()*.15 + .85) * p1.atkMult)*10) / 10 //we round damage to one decimal place
@@ -147,12 +149,14 @@ function battleStep() { //function to process one step of the battle (a turn for
 
 }
 
-function renderPokemon(){
+function renderPokemon() {
     console.log(pokemon);
     let pokeImages = [pokemon[0].spriteBack, pokemon[1].spriteForward];
-    for(let i=0; i<pokeCards.querySelectorAll("img").length;i++){ //loop through each pokemon display and update it visually
-        pokeCards.querySelectorAll("img")[i].setAttribute("src", pokeImages[i])
+    for (let i = 0; i < pokeCards.querySelectorAll("img").length; i++) { //loop through each pokemon display and update it visually
+        pokeCards.querySelectorAll("img")[i].setAttribute("src", pokeImages[i]) {
+            if (pokeCards.querySelectorAll("img")[i].setAttribute("class", "flip-front-back"));
     }
-    
+    }
 }
+
 getPokemon(pokeURL1, pokeURL2);
