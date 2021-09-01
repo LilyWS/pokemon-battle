@@ -6,10 +6,13 @@ looks like: ?p1=charizard&p2=pikachu&loc=
 var parameters = new URLSearchParams(window.location.search);
 
 var weatherAPIKey = 'e93a9a6062496e0d1483164567d29081';
+var city = (parameters.get("loc")) ? parameters.get("loc").toLowerCase() : "Charlotte";
 //TODO: account for spaces by adding hyphens (tapu lele)
-//CONVERT TO LOWER
-var pokemon1 = (parameters.get("p1")) ? parameters.get("p1") : "squirtle";
-var pokemon2 = (parameters.get("p2")) ? parameters.get("p2") : "bulbasaur";
+var pokemon1= (parameters.get("p1")) ? parameters.get("p1").toLowerCase() : "squirtle";
+var pokemon2= (parameters.get("p2")) ? parameters.get("p2").toLowerCase() : "bulbasaur";
+
+var weatherURL =  `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPIKey}`;
+var environmentStats = {};
 
 var pokemon = []; //will contain objects representing pokemon 1 and 2
 var pokeURL1 = `https://pokeapi.co/api/v2/pokemon/${pokemon1}/`;
@@ -21,6 +24,24 @@ var pokeCards = document.querySelector("#live-battle");
 //order is the same as pokemon array but order by speed instead of player. pokemon is used for rendering and order for logic
 var order = [];//order in which pokemon will take turns
 var battleTimer;
+
+function getWeather(url) {
+    fetch(url)
+    .then(function (response) {
+        return response.json();
+      })
+    .then(function (data) {
+        console.log(data);
+        setWeather(data);
+        return data;
+    });
+}
+
+function setWeather(data){
+    environmentStats.weatherType = data.weather[0].main;
+    environmentStats.time = moment(moment.utc()).add(data.timezone, 'seconds').format('H:mm');
+    console.log(environmentStats)
+}
 
 function getPokemon(url, url2) {
     fetch(url)
@@ -153,9 +174,11 @@ function renderPokemon() {
     console.log(pokemon);
     let pokeImages = [pokemon[0].spriteBack, pokemon[1].spriteForward];
     for (let i = 0; i < pokeCards.querySelectorAll("img").length; i++) { //loop through each pokemon display and update it visually
-        pokeCards.querySelectorAll("img")[i].setAttribute("src", pokeImages[i])
-        if (pokemon[i].spriteBack == pokemon[i].spriteForward){pokeCards.querySelectorAll("img")[i].setAttribute("class", "flip-front-back")};
+        pokeCards.querySelectorAll("img")[i].setAttribute("src", pokeImages[i]) 
+        if (pokemon[i].spriteBack == pokemon[i].spriteForward && !i) {
+            pokeCards.querySelectorAll("img")[i].setAttribute("class", "flip-front-back")
+        }
     }
 }
-
+getWeather(weatherURL);
 getPokemon(pokeURL1, pokeURL2);
