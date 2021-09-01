@@ -123,12 +123,50 @@ header {
     box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.8);
 }
 
+#p1Img {
+    position: relative;
+    top: 120px;
+    left: 30px;
+    width: 200px;
+}
+
+#p2Img {
+    position: relative;
+    top: 30px;
+    left: 150px;
+    width: 200px;
+}
+
+.attack1:hover {
+    transform: rotate(8deg);
+}
+
+.attack2:hover {
+    transform: rotate(-8deg);
+}
+
+.hit:hover {
+    transform: scale(0.8);
+}
+
+.ko:hover {
+    opacity: 0.5;
+}
+
+.win, 
+.lose {
+    color: white;
+    font-size: 60px;
+    text-align: center;
+    margin-top: 50px;
+}
+
 #left-stats, 
 #right-stats {
     height: 300px;
     width: 200px;
     background-color: rgba(0, 0, 0, 0.8);
-    box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.8);
+    box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.8 );
     border-radius: 10px;
     border: 3px solid black;
 }
