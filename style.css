@@ -9,6 +9,31 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    font-family: 'Poppins', sans-serif;
+}
+
+#top-page {
+    height: 25px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 0px 0px 2px 0px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 17px 25px rgba(0, 0, 0, 0.5);
+}
+
+#instructions {
+    margin-left: 25px;
+    text-decoration: none;
+    color: white;
+    line-height: 40px;
+    font-size: 24px;
+    display: inline-block;
+}
+
+#instructions:hover {
+    color: rgb(238, 129, 129);
+    transform: scale(1.05);
+    text-shadow: 5px 5px 40px rgb(255, 14, 14);
+    transition: text-shadow 0.25s ease, transform 0.25s ease;
 }
 
 #container {
@@ -16,13 +41,13 @@ body {
     width: 750px;
     height: 500px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 75px;
     background-color: rgba(255, 255, 255, 0.4);
     padding-top: 20px;
     box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.6);
 }
 
-header {
+h1 {
     text-align: center;
     font-size: 36px;
     margin: 0 20px 25px 20px;
@@ -47,7 +72,7 @@ header {
     border: 2px double black;
 }
 
-#current-loc:hover {
+#current-loc:hover { /* current location circle button */
     
 }
 

@@ -8,12 +8,22 @@
     <title>PokeBattle Simulator</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
+    <link href="assets/pokeball.jpg" rel="icon" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
+    <header>
+        <nav id="top-page">
+            <a id="instructions" href="#instructions">How to Play</a>
+        </nav>
+    </header>
+    
     <div id="container">
-        <header>After selecting a City, choose two Pokemon below to see them duke it out!</header>
+        <h1>After selecting a City, choose two Pokemon below to see them duke it out!</h1>
         <form action="./battle.html" method="GET">
             <input id="city-finder" type="text" value="" name="loc" placeholder="Search any City"><button id="current-loc"></button>
                 <div id="inner-container">

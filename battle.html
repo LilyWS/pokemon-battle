@@ -7,13 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeBattle Simulator | FIGHT</title>
     <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="battlepage.css"">
+    <link rel="stylesheet" href="battlepage.css">
+    <link href="assets/pokeball.jpg" rel="icon" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
+    <header>
+        <nav id="top-page">
+            <a id="instructions" href="#instructions">How to Play</a>
+        </nav>
+    </header>
+
     <div id="container">
-        <header>New battle? You know what to do!</header>
+        <h1>New battle? You know what to do!</h1>
         <form action="./battle.html" method="GET">
             <input id="city-finder" type="text" value="" name="loc" placeholder="Search any City"><button id="current-loc"></button>
                 <div id="inner-container">
@@ -29,6 +39,7 @@
         <main id="positioning">
             <div id="left-stats">
                 <h2 id="left-pokemon-name">Pokemon 1</h2>
+                <progress class="health-bar" value="100" max="100"></progress> <!--value=" " can be changed to decrease hp-->
                 <p id="attack1" class="hp-remaining">Example HP: 80/100</p>
                 <p id="attack1" class="hp-remaining">Example HP: 35/100</p>
                 <p id="attack1" class="hp-remaining">Example HP: 0/100</p>
@@ -42,6 +53,7 @@
 
             <div id="right-stats">
                 <h2 id="right-pokemon-name">Pokemon 2</h2>
+                <progress class="health-bar" value="100" max="100"></progress> <!--value=" " can be changed to decrease hp-->
                 <p id="attack1" class="hp-remaining">Example HP: 92/100</p>
                 <p id="attack1" class="hp-remaining">Example HP: 57/100</p>
                 <p id="attack1" class="hp-remaining">Example KO'd Opp</p>
