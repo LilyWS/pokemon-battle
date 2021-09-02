@@ -62,20 +62,6 @@ h1 {
     border: 1px solid black;
 }
 
-#current-loc {
-    border-radius: 50%;
-    background-color: grey;
-    position: relative;
-    left: 32%;
-    width: 22px;
-    height: 22px;
-    border: 2px double black;
-}
-
-#current-loc:hover { /* current location circle button */
-    
-}
-
 #inner-container {
     margin-top: 60px;
     width: 700px;
