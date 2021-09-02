@@ -12,7 +12,7 @@ var pokemon1 = (parameters.get("p1")) ? parameters.get("p1").toLowerCase() : "sq
 var pokemon2 = (parameters.get("p2")) ? parameters.get("p2").toLowerCase() : "bulbasaur";
 
 var weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPIKey}`;
-var environmentStats = {};
+var environmentStats = null;
 
 var pokemon = []; //will contain objects representing pokemon 1 and 2
 var pokeURL1 = `https://pokeapi.co/api/v2/pokemon/${pokemon1}/`;
@@ -31,7 +31,190 @@ var p2HealthBar =  p2StatDisplay.querySelector(".health-bar");
 var order = [];//order in which pokemon will take turns
 var battleTimer;
 
+//effects for every type depending on weather values are atkMult followed by Def multiplier
+var weatherEffects = {
+    grass:{
+        "Clear": "2",
+        "Clouds": "1",
+        "Rain": "2",
+        "Thunderstorm": "0.5",
+        "Snow": "0.5",
+        "Atmosphere": "1",
+        "Day": "1",
+        "Night": "1"
+    },
+    fire:{
 
+            "Clear": "2",
+            "Clouds": "1",
+            "Rain": "0.5",
+            "Thunderstorm": "0.5",
+            "Snow": "1",
+            "Atmosphere": "2",
+            "Day": "1",
+            "Night": "1"
+        }, 
+    water:{
+            "Clear": "0.5",
+            "Clouds": "2",
+            "Rain": "2",
+            "Thunderstorm": "2",
+            "Snow": "1",
+            "Atmosphere": "1",
+            "Day": "1",
+            "Night": "1"
+        },
+    electric: {
+            "Clear": "1",
+            "Clouds": "1",
+            "Rain": "2",
+            "Thunderstorm": "2",
+            "Snow": "1",
+            "Atmosphere": "2",
+            "Day": "1",
+            "Night": "1"
+        },
+    psychic: {
+            "Clear": "1",
+            "Clouds": "2",
+            "Rain": "1",
+            "Thunderstorm": "1",
+            "Snow": "1",
+            "Atmosphere": "1",
+            "Day": "1",
+            "Night": "1"
+        },
+    ice:{
+            "Clear": "0.5",
+            "Clouds": "1",
+            "Rain": "1",
+            "Thunderstorm": "1",
+            "Snow": "2",
+            "Atmosphere": "2",
+            "Day": "1",
+            "Night": "1"
+        },
+    dragon:{
+            "Clear": "1",
+            "Clouds": "2",
+            "Rain": "1",
+            "Thunderstorm": "2",
+            "Snow": "0.5",
+            "Atmosphere": "1",
+            "Day": "1",
+            "Night": "1"
+        },
+    dark:{
+            "Clear": "1",
+            "Clouds": "1",
+            "Rain": "1",
+            "Thunderstorm": "1",
+            "Snow": "1",
+            "Atmosphere": "1",
+            "Day": "0.5",
+            "Night": "2"
+        },
+    fairy:{
+            "Clear": "1",
+            "Clouds": "1",
+            "Rain": "1",
+            "Thunderstorm": "1",
+            "Snow": "1",
+            "Atmosphere": "1",
+            "Day": "2",
+            "Night": "0.5"
+        },
+    steel:{
+            "Clear": "2",
+            "Clouds": "1",
+            "Rain": "1",
+            "Thunderstorm": "1",
+            "Snow": "1",
+            "Atmosphere": "0.5",
+            "Day": "1",
+            "Night": "1"
+        },
+        ghost:{
+            "Clear": "0.5",
+            "Clouds": "1",
+            "Rain": "1",
+            "Thunderstorm": "2",
+            "Snow": "1",
+            "Atmosphere": "1",
+            "Day": "0.5",
+            "Night": "2"
+        },
+        bug:{
+            "Clear": "1",
+            "Clouds": "1",
+            "Rain": "1",
+            "Thunderstorm": "0.5",
+            "Snow": "0.5",
+            "Atmosphere": "0.5",
+            "Day": "2",
+            "Night": "0.5"
+        },
+        rock:{
+            "Clear": "2",
+            "Clouds": "1",
+            "Rain": "0.5",
+            "Thunderstorm": "0.5",
+            "Snow": "1",
+            "Atmosphere": "1",
+            "Day": "1",
+            "Night": "1"
+        },
+        ground:{
+            "Clear": "2",
+            "Clouds": "1",
+            "Rain": "0.5",
+            "Thunderstorm": "0.5",
+            "Snow": "0.5",
+            "Atmosphere": "2",
+            "Day": "1",
+            "Night": "1"
+        },
+        poison:{
+            "Clear": "1",
+            "Clouds": "1",
+            "Rain": "1",
+            "Thunderstorm": "1",
+            "Snow": "1",
+            "Atmosphere": "1",
+            "Day": "1",
+            "Night": "2"
+        },
+        flying:{
+            "Clear": "2",
+            "Clouds": "1",
+            "Rain": "1",
+            "Thunderstorm": "0.5",
+            "Snow": "0.5",
+            "Atmosphere": "1",
+            "Day": "2",
+            "Night": "1"
+        },
+        fighting:{
+            "Clear": "1",
+            "Clouds": "1",
+            "Rain": "1",
+            "Thunderstorm": "1",
+            "Snow": "1",
+            "Atmosphere": "1",
+            "Day": "2",
+            "Night": "1"
+        },
+        normal:{
+            "Clear": "1",
+            "Clouds": "1",
+            "Rain": "1",
+            "Thunderstorm": "1",
+            "Snow": "1",
+            "Atmosphere": "1",
+            "Day": "1",
+            "Night": "1"
+        }
+}
 
 function getWeather(url) {
 
@@ -54,12 +237,6 @@ function getWeather(url) {
             setWeather(data);
             return data;
         });
-}
-
-function setWeather(data) {
-    environmentStats.weatherType = data.weather[0].main;
-    environmentStats.time = moment(moment.utc()).add(data.timezone, 'seconds').format('H:mm');
-    console.log(environmentStats)
 }
 
 function getPokemon(url, url2) {
@@ -102,12 +279,22 @@ function getType(url, url2) {
         });
 }
 
+function setWeather(data) {
+    environmentStats = {};
+    environmentStats.weatherType = (data.weather[0].id[0] != 7) ? data.weather[0].main : "Atmosphere";
+    environmentStats.time = moment(moment.utc()).add(data.timezone, 'seconds').format('H:mm');
+    console.log(environmentStats)
+    console.log("retrieved weather")
+    if (pokemon[0].typeData && pokemon[1].typeData) { //check if both pokemon are loaded
+        initBattle()
+    }
+}
+
 function createPokemon(data, pokeIndex) { //pokeIndex is which index of the pokemon array we're accessing 
     //we have to do a second api call to get the specification of their type and how it relates to other types
     //let typeUrl = `https://pokeapi.co/api/v2/type/${}/`;
     //let typeData = getType()
 
-    //TODO: catch edge cases where the pokemon has no back sprite or front sprite
     pokemon[pokeIndex] = {
         name: data.name,
         spriteBack: (!data.sprites.back_default) ? data.sprites.front_default : data.sprites.back_default,
@@ -129,7 +316,7 @@ function createPokemon(data, pokeIndex) { //pokeIndex is which index of the poke
 }
 
 function loadTypes(pokeIndex) { //this function exists so that the game will not try to run before the type api call completes
-    if (pokemon[0].typeData && pokemon[1].typeData) { //check if both pokemon are loaded
+    if (pokemon[0].typeData && pokemon[1].typeData && environmentStats != null) { //check if both pokemon are loaded and weather loaded
         initBattle()
     }
 }
@@ -154,9 +341,13 @@ function initBattle() { //set up the battle
     p2.using = (p2.sAtk > p2.atk) ? 'sAtk' : 'atk';
     p1.defWith = (p2.using == 'sAtk') ? p1.sDef : p1.def;
     //determine how type will multiply their attacks
-
-    p1.atkMult = getAtkMult(p1.typeData.damage_relations, p2.type);
-    p2.atkMult = getAtkMult(p2.typeData.damage_relations, p1.type);
+    while(environmentStats == {}){
+        console.log("wating");
+    }
+    p1.atkMult = getAtkMult(p1.typeData.damage_relations, p2.type) * getWeatherMult(p1.type);
+    p2.atkMult = getAtkMult(p2.typeData.damage_relations, p1.type) * getWeatherMult(p2.type);
+    p1.defMult = getWeatherMult(p1.type);
+    p2.defMult = getWeatherMult(p2.type);
     battleTimer = setInterval(battleStep, 250);
 }
 
@@ -167,16 +358,20 @@ function getAtkMult(dmgRelations, targetType) {
         return (.5);
     } else if (dmgRelations.no_damage_to.some(e => e.name === targetType)) {
         return (.25);
-    }else {
+    } else {
         return(1);
     }
+}
+
+function getWeatherMult(type){
+    return(weatherEffects[type][environmentStats.weatherType]);
 }
 
 function battleStep() { //function to process one step of the battle (a turn for both players)
     for (let i = 0; i < order.length; i++) {
         let p1 = order[i]; //in this context p1 is the currently attacking pokemon and p2 is the defending one
         let p2 = (i) ? order[0] : order[1];
-        let dmgVal = Math.round(((p1[p1.using] / p2.defWith) * (Math.random() * .15 + .85) * p1.atkMult) * 10) / 10 //we round damage to one decimal place
+        let dmgVal = Math.round(((p1[p1.using] / (p2.defWith * p2.defMult)) * (Math.random() * .15 + .85) * p1.atkMult) * 10) / 10 //we round damage to one decimal place
         p2.cHp = Math.round((p2.cHp - dmgVal) * 10) / 10; //we round health to tenths place because javascript sucks at floating point numbers
 
         if (p2.cHp < .1) {
@@ -220,4 +415,3 @@ function renderPokemon() {
 }
 getWeather(weatherURL);
 getPokemon(pokeURL1, pokeURL2);
-showNames();
