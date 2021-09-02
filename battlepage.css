@@ -62,20 +62,6 @@ h1 {
     border: 1px solid black;
 }
 
-#current-loc {
-    border-radius: 50%;
-    background-color: grey;
-    position: relative;
-    left: 32%;
-    width: 22px;
-    height: 22px;
-    border: 2px double black;
-}
-
-#current-loc:hover { /* current location circle button */
-    
-}
-
 #inner-container {
     margin-top: 20px;
     width: 700px;
@@ -238,23 +224,25 @@ progress[value] {
     text-align: center;
     margin-top: 5px;
     text-decoration: underline;
+    font-family:'Segoe UI', Tahoma, 'Geneva', Verdana, sans-serif
 }
 
 #city-name {
     font-size: 24px;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 #time {
     font-size: 24px;
     text-align: center;
     margin-top: -100px;
+    font-family:'Segoe UI', Tahoma, 'Geneva', Verdana, sans-serif
 }
 
 #temp {
     text-align: center;
-    margin-top: 100px;
+    margin-top: 90px;
     font-size: 42px;
 }
 
