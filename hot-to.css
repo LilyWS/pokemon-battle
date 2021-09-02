@@ -62,10 +62,12 @@ body {
     box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.6);
 }
 
+
 h1 {
     text-align: center;
-    font-size: 42px;
+    font-size: 38px;
     margin: 20px 20px 25px 20px;
+    font-weight: 100px;
 }
 
 hr {
@@ -77,5 +79,23 @@ hr {
 p {
     text-align: center;
     margin: 20px 50px 0 50px;
+    font-size: 28px;
+}
+#pokemon_conditional {
+    display: inline-block;
+    margin-left: 30px;  
+    border-radius: 5px;
+    width: 600px;
+    padding-top: 20px;
+    padding-right: 300px
+}
+h2 {
+    padding-top: 20px;
+    text-align: center;
     font-size: 32px;
+    margin: 20px 20px 25px 20px;
+    font-weight: 100px;
+}
+ul {
+    font-size: 25px;
 }
