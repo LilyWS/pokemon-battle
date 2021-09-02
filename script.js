@@ -18,8 +18,14 @@ var pokemon = []; //will contain objects representing pokemon 1 and 2
 var pokeURL1 = `https://pokeapi.co/api/v2/pokemon/${pokemon1}/`;
 var pokeURL2 = `https://pokeapi.co/api/v2/pokemon/${pokemon2}/`;
 
-//following code is tempory until better id's get assigned to pokemon slots
+//render variables
 var pokeCards = document.querySelector("#live-battle");
+var p1StatDisplay = document.getElementById('left-stats');
+var p2StatDisplay = document.getElementById('right-stats');
+var p1Name = p1StatDisplay.querySelector("#left-pokemon-name");
+var p2Name = p2StatDisplay.querySelector("#right-pokemon-name");
+var p1HealthBar = p1StatDisplay.querySelector(".health-bar");
+var p2HealthBar =  p2StatDisplay.querySelector(".health-bar");
 
 //order is the same as pokemon array but order by speed instead of player. pokemon is used for rendering and order for logic
 var order = [];//order in which pokemon will take turns
@@ -151,7 +157,7 @@ function initBattle() { //set up the battle
 
     p1.atkMult = getAtkMult(p1.typeData.damage_relations, p2.type);
     p2.atkMult = getAtkMult(p2.typeData.damage_relations, p1.type);
-    //battleTimer = setInterval(battleStep, 250);
+    battleTimer = setInterval(battleStep, 250);
 }
 
 function getAtkMult(dmgRelations, targetType) {
@@ -180,22 +186,27 @@ function battleStep() { //function to process one step of the battle (a turn for
         console.log(`${p2.name} is hit for ${dmgVal}!`);
         console.log(`The have ${p2.cHp} HP left!`);
     }
+    renderStats();
 
 }
 
-function showNames() {
-    var pokeNameLeft = document.getElementById('left-input');
-    var pokeNameRight = document.getElementById('right-input');
-    var activePlayerLeft = document.getElementById('left-pokemon-name');
-    var activePlayerRight = document.getElementById('right-pokemon-name');
-    activePlayerLeft.textContent = pokemon1.charAt(0).toUpperCase() + pokemon1.slice(1).toLowerCase();
-    activePlayerRight.textContent = pokemon2.charAt(0).toUpperCase() + pokemon2.slice(1).toLowerCase();
-    console.log(pokeNameLeft)
-    console.log(pokeNameRight)
+function renderStats() {
+
+
+    p1Name.textContent = pokemon1.charAt(0).toUpperCase() + pokemon1.slice(1).toLowerCase();
+    p2Name.textContent = pokemon2.charAt(0).toUpperCase() + pokemon2.slice(1).toLowerCase();
+
+    p1HealthBar.setAttribute('max', pokemon[0].mHp);
+    p1HealthBar.setAttribute('value', pokemon[0].cHp);
+    p2HealthBar.setAttribute('max', pokemon[1].mHp);
+    p2HealthBar.setAttribute('value', pokemon[1].cHp);
 }
 
 function renderPokemon() {
     console.log(pokemon);
+    renderStats();
+
+    //render image to Battle
     let pokeImages = [pokemon[0].spriteBack, pokemon[1].spriteForward];
     for (let i = 0; i < pokeCards.querySelectorAll("img").length; i++) { //loop through each pokemon display and update it visually
         pokeCards.querySelectorAll("img")[i].setAttribute("src", pokeImages[i])
