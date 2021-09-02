@@ -25,13 +25,26 @@ var pokeCards = document.querySelector("#live-battle");
 var order = [];//order in which pokemon will take turns
 var battleTimer;
 
+
+
 function getWeather(url) {
+
+    var cityName = document.getElementById('city-name');
+    var cityTime = document.getElementById('time');
+    var cityTemp = document.getElementById('temp');
+    cityTime.textContent = moment().format('h:mm a');
+
     fetch(url)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
             console.log(data);
+            cityName.textContent = data.name;
+            cityTemp.textContent = parseInt(data.main.temp) + "°";
+            var icon = data.weather[0].icon;
+            var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+            document.getElementById('icon').setAttribute('src', iconUrl);
             setWeather(data);
             return data;
         });
