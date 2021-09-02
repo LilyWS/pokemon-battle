@@ -167,6 +167,8 @@ function getAtkMult(dmgRelations, targetType) {
         return (.5);
     } else if (dmgRelations.no_damage_to.some(e => e.name === targetType)) {
         return (.25);
+    }else {
+        return(1);
     }
 }
 
