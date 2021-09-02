@@ -8,36 +8,55 @@ var parameters = new URLSearchParams(window.location.search);
 var weatherAPIKey = 'e93a9a6062496e0d1483164567d29081';
 var city = (parameters.get("loc")) ? parameters.get("loc").toLowerCase() : "Charlotte";
 //TODO: account for spaces by adding hyphens (tapu lele)
-var pokemon1= (parameters.get("p1")) ? parameters.get("p1").toLowerCase() : "squirtle";
-var pokemon2= (parameters.get("p2")) ? parameters.get("p2").toLowerCase() : "bulbasaur";
+var pokemon1 = (parameters.get("p1")) ? parameters.get("p1").toLowerCase() : "squirtle";
+var pokemon2 = (parameters.get("p2")) ? parameters.get("p2").toLowerCase() : "bulbasaur";
 
-var weatherURL =  `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPIKey}`;
+var weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPIKey}`;
 var environmentStats = {};
 
 var pokemon = []; //will contain objects representing pokemon 1 and 2
 var pokeURL1 = `https://pokeapi.co/api/v2/pokemon/${pokemon1}/`;
 var pokeURL2 = `https://pokeapi.co/api/v2/pokemon/${pokemon2}/`;
 
-//following code is tempory until better id's get assigned to pokemon slots
+//render variables
 var pokeCards = document.querySelector("#live-battle");
+var p1StatDisplay = document.getElementById('left-stats');
+var p2StatDisplay = document.getElementById('right-stats');
+var p1Name = p1StatDisplay.querySelector("#left-pokemon-name");
+var p2Name = p2StatDisplay.querySelector("#right-pokemon-name");
+var p1HealthBar = p1StatDisplay.querySelector(".health-bar");
+var p2HealthBar =  p2StatDisplay.querySelector(".health-bar");
 
 //order is the same as pokemon array but order by speed instead of player. pokemon is used for rendering and order for logic
 var order = [];//order in which pokemon will take turns
 var battleTimer;
 
+
+
 function getWeather(url) {
+
+    var cityName = document.getElementById('city-name');
+    var cityTime = document.getElementById('time');
+    var cityTemp = document.getElementById('temp');
+    cityTime.textContent = moment().format('h:mm a');
+
     fetch(url)
-    .then(function (response) {
-        return response.json();
-      })
-    .then(function (data) {
-        console.log(data);
-        setWeather(data);
-        return data;
-    });
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            cityName.textContent = data.name;
+            cityTemp.textContent = parseInt(data.main.temp) + "°";
+            var icon = data.weather[0].icon;
+            var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+            document.getElementById('icon').setAttribute('src', iconUrl);
+            setWeather(data);
+            return data;
+        });
 }
 
-function setWeather(data){
+function setWeather(data) {
     environmentStats.weatherType = data.weather[0].main;
     environmentStats.time = moment(moment.utc()).add(data.timezone, 'seconds').format('H:mm');
     console.log(environmentStats)
@@ -138,7 +157,7 @@ function initBattle() { //set up the battle
 
     p1.atkMult = getAtkMult(p1.typeData.damage_relations, p2.type);
     p2.atkMult = getAtkMult(p2.typeData.damage_relations, p1.type);
-    //battleTimer = setInterval(battleStep, 250);
+    battleTimer = setInterval(battleStep, 250);
 }
 
 function getAtkMult(dmgRelations, targetType) {
@@ -148,6 +167,8 @@ function getAtkMult(dmgRelations, targetType) {
         return (.5);
     } else if (dmgRelations.no_damage_to.some(e => e.name === targetType)) {
         return (.25);
+    }else {
+        return(1);
     }
 }
 
@@ -167,19 +188,36 @@ function battleStep() { //function to process one step of the battle (a turn for
         console.log(`${p2.name} is hit for ${dmgVal}!`);
         console.log(`The have ${p2.cHp} HP left!`);
     }
+    renderStats();
 
+}
+
+function renderStats() {
+
+
+    p1Name.textContent = pokemon1.charAt(0).toUpperCase() + pokemon1.slice(1).toLowerCase();
+    p2Name.textContent = pokemon2.charAt(0).toUpperCase() + pokemon2.slice(1).toLowerCase();
+
+    p1HealthBar.setAttribute('max', pokemon[0].mHp);
+    p1HealthBar.setAttribute('value', pokemon[0].cHp);
+    p2HealthBar.setAttribute('max', pokemon[1].mHp);
+    p2HealthBar.setAttribute('value', pokemon[1].cHp);
 }
 
 function renderPokemon() {
     console.log(pokemon);
-    
+    renderStats();
+
+    //render image to Battle
     let pokeImages = [pokemon[0].spriteBack, pokemon[1].spriteForward];
     for (let i = 0; i < pokeCards.querySelectorAll("img").length; i++) { //loop through each pokemon display and update it visually
-        pokeCards.querySelectorAll("img")[i].setAttribute("src", pokeImages[i]) 
+        pokeCards.querySelectorAll("img")[i].setAttribute("src", pokeImages[i])
         if (pokemon[i].spriteBack == pokemon[i].spriteForward && !i) {
             pokeCards.querySelectorAll("img")[i].setAttribute("class", "flip-front-back")
         }
     }
+
 }
 getWeather(weatherURL);
 getPokemon(pokeURL1, pokeURL2);
+showNames();
