@@ -1,0 +1,101 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background: url(./assets/ashpaul.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+}
+
+#top-page {
+    height: 25px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 0px 0px 2px 0px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 17px 25px rgba(0, 0, 0, 0.5);
+}
+
+#instructions {
+    margin-left: 25px;
+    text-decoration: none;
+    color: white;
+    line-height: 40px;
+    font-size: 24px;
+    display: inline-block;
+}
+
+#instructions:hover {
+    color: rgb(238, 129, 129);
+    transform: scale(1.05);
+    text-shadow: 5px 5px 40px rgb(255, 14, 14);
+    transition: text-shadow 0.25s ease, transform 0.25s ease;
+}
+
+#display {
+    display: flex;
+}
+
+#container {
+    border-radius: 25px;
+    width: 700px;
+    height: 500px;
+    margin: auto;
+    margin-top: 75px;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding-top: 20px;
+    box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.6);
+}
+
+#container2 {
+    border-radius: 25px;
+    width: 700px;
+    height: 500px;
+    margin: auto;
+    margin-top: 75px;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding-top: 20px;
+    box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.6);
+}
+
+
+h1 {
+    text-align: center;
+    font-size: 38px;
+    margin: 20px 20px 25px 20px;
+    font-weight: 100px;
+}
+
+hr {
+    width: 80%;
+    margin: auto;
+    border: 0.5px solid black;
+}
+
+p {
+    text-align: center;
+    margin: 20px 50px 0 50px;
+    font-size: 28px;
+}
+#pokemon_conditional {
+    display: inline-block;
+    margin-left: 30px;  
+    border-radius: 5px;
+    width: 600px;
+    padding-top: 20px;
+    padding-right: 300px
+}
+h2 {
+    padding-top: 20px;
+    text-align: center;
+    font-size: 32px;
+    margin: 20px 20px 25px 20px;
+    font-weight: 100px;
+}
+ul {
+    font-size: 25px;
+}
