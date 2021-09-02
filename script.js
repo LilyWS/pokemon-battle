@@ -281,7 +281,7 @@ function getType(url, url2) {
 
 function setWeather(data) {
     environmentStats = {};
-    environmentStats.weatherType = data.weather[0].main;
+    environmentStats.weatherType = (data.weather[0].id[0] != 7) ? data.weather[0].main : "Atmosphere";
     environmentStats.time = moment(moment.utc()).add(data.timezone, 'seconds').format('H:mm');
     console.log(environmentStats)
     console.log("retrieved weather")
@@ -348,7 +348,7 @@ function initBattle() { //set up the battle
     p2.atkMult = getAtkMult(p2.typeData.damage_relations, p1.type) * getWeatherMult(p2.type);
     p1.defMult = getWeatherMult(p1.type);
     p2.defMult = getWeatherMult(p2.type);
-    //battleTimer = setInterval(battleStep, 250);
+    battleTimer = setInterval(battleStep, 250);
 }
 
 function getAtkMult(dmgRelations, targetType) {
@@ -358,6 +358,8 @@ function getAtkMult(dmgRelations, targetType) {
         return (.5);
     } else if (dmgRelations.no_damage_to.some(e => e.name === targetType)) {
         return (.25);
+    } else {
+        return(1);
     }
 }
 
