@@ -106,7 +106,37 @@ h1 {
     transform: scale(1.1);
 }
 
+
+@media screen and (max-width: 800px) {
+    #container {
+        width: 450px;
+    }
+    #city-finder {
+        position: relative;
+        left: 25%;
+        font-size: 18px;
+    }
+    #inner-container {
+        margin-top: 20px;
+        width: 400px;
+    }
+    #left-input, #right-input {
+        display: block;
+        margin-left: 28%;  
+        font-size: 18px;
+    }
+    #left-img, #right-img {
+        width: 100px;
+        display: inline-block;
+        margin-left: 75px;
+    }
+    #btn-fight {
+        position: relative;
+        left: 40%;
+    }
+
 .flip-front-back {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
+
 }
