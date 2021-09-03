@@ -109,6 +109,15 @@ h1 {
 
 #positioning h2 {
     text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: white;
+    font-size: 34px;
+    text-decoration: underline;
+}
+
+#positioning h3 {
+    text-align: center;
     margin-top: 30px;
     margin-bottom: 20px;
     color: white;
@@ -154,21 +163,6 @@ h1 {
     width: 200px;
 }
 
-/*attack effect for bottom left poke*/
-.attack1 {
-    transform: rotate(8deg);
-}
-
-/*attack effect for top right poke*/
-.attack2 {
-    transform: rotate(-8deg);
-}
-
-/*effect when attacked by opp, shrinks a little*/
-.hit {
-    transform: scale(0.8);
-}
-
 /*when lost in battle, opacity is halfed*/
 .ko {
     opacity: 0.5;
@@ -179,7 +173,7 @@ h1 {
     color: white;
     font-size: 60px;
     text-align: center;
-    margin-top: 70px;
+    margin-top: 40px;
 }
 
 #left-stats, 

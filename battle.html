@@ -38,7 +38,7 @@
     </div>
 
     <div id="wl-stats">
-        <p id="stats">W/L Stats:<button id="reset" onclick="resetWins()">Reset</button></p>
+        <p id="stats">Win Stats:<button id="reset" onclick="resetWins()">Reset</button></p>
         <p id="p1-text">Player 1 Win Count:</p>
         <p id="p1-wins"></p>
         <p id="p2-text">Player 2 Win Count:</p>
@@ -55,26 +55,28 @@
 
         <main id="positioning">
             <div id="left-stats">
-                <h2 id="left-pokemon-name">Pokemon 1</h2>
+                <h2>Player 1</h2>
+                <h3 id="left-pokemon-name"></h3>
                 <progress class="health-bar" value="100" max="100"></progress> <!--value=" " can be changed to decrease hp-->
                 <p id="attack1" class="hp-remaining"></p>
                 <p id="attack2" class="hp-remaining"></p>
                 <p id="attack3" class="hp-remaining"></p>
-                <h3 class="win lose"></h3>
+                <h4 class="win lose"></h4>
             </div>
 
             <div id="live-battle">
-                <img id="p1Img" /> <!-- can have classes through js // class="attack1 hit ko flip-front-back"--> 
-                <img id="p2Img" /> <!-- can have classes through js // class="attack2 hit ko"-->
+                <img id="p1Img" /> <!-- can have classes through js // class="ko flip-front-back"--> 
+                <img id="p2Img" /> <!-- can have classes through js // class="ko"-->
             </div>
 
             <div id="right-stats">
-                <h2 id="right-pokemon-name">Pokemon 2</h2>
+                <h2>Player 2</h2>
+                <h3 id="right-pokemon-name"></h3>
                 <progress class="health-bar" value="100" max="100"></progress> <!--value=" " can be changed to decrease hp-->
                 <p id="attack4" class="hp-remaining"></p>
                 <p id="attack5" class="hp-remaining"></p>
                 <p id="attack6" class="hp-remaining"></p>
-                <h3 class="win lose"></h3>
+                <h4 class="win lose"></h4>
             </div>
         </main>
     <script src="https://momentjs.com/downloads/moment.js"></script>
