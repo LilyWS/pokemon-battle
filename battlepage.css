@@ -20,7 +20,7 @@ body {
     box-shadow: 0px 0px 17px 25px rgba(0, 0, 0, 0.5);
 }
 
-#instructions {
+.instructions {
     margin-left: 25px;
     text-decoration: none;
     color: white;
@@ -29,23 +29,7 @@ body {
     display: inline-block;
 }
 
-#instructions:hover {
-    color: rgb(238, 129, 129);
-    transform: scale(1.05);
-    text-shadow: 5px 5px 40px rgb(255, 14, 14);
-    transition: text-shadow 0.25s ease, transform 0.25s ease;
-}
-#pokedex {
-    padding-top: 5px;
-    margin-left: 25px;
-    text-decoration: none;
-    color: white;
-    line-height: 40px;
-    font-size: 24px;
-    display: inline-block;
-}
-
-#pokedex:hover {
+.instructions:hover {
     color: rgb(238, 129, 129);
     transform: scale(1.05);
     text-shadow: 5px 5px 40px rgb(255, 14, 14);
@@ -464,7 +448,6 @@ progress[value] {
         width: 400px;
         margin: auto;
         margin-top: 50px;
-
     }
     h1 {
         font-size: 20px;
@@ -529,6 +512,11 @@ progress[value] {
     }
     #right-stats {
         margin-left: 420px;
+    }
+    .win, 
+    .lose {
+    font-size: 50px;
+    margin-top: 40px;
     }
 }
 
