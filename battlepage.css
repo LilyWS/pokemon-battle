@@ -217,6 +217,21 @@ progress[value] {
     box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.6);
 }
 
+#reset {
+    background-image: linear-gradient(to top right, white, rgb(255, 106, 106));
+    font-size: 22px;
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+#reset:hover {
+    box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.8);
+    background-image: linear-gradient(to top right, rgb(250, 198, 198), rgb(194, 63, 63));
+    cursor: pointer;
+}
+
 #stats {
     font-size: 32px;
     text-align: center;
@@ -295,7 +310,7 @@ progress[value] {
     width: 100px;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1400px) {
    #weather-info {
         right: 20px;
     }
@@ -308,6 +323,12 @@ progress[value] {
 }
 
 @media screen and (max-width: 1300px) {
+    #wl-stats {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        width: 180px;
+    }
     #left-stats {
         margin-left: 20px;
     }
@@ -344,6 +365,9 @@ progress[value] {
 }
 
 @media screen and (max-width: 1000px) {
+    #wl-stats {
+        display: none;
+    }
     #container {
         height: 100px;
         width: 600px;
