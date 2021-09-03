@@ -18,6 +18,9 @@ var pokemon = []; //will contain objects representing pokemon 1 and 2
 var pokeURL1 = `https://pokeapi.co/api/v2/pokemon/${pokemon1}/`;
 var pokeURL2 = `https://pokeapi.co/api/v2/pokemon/${pokemon2}/`;
 
+var p1WinCount = (localStorage.getItem("p1Wins")) ? localStorage.getItem("p1Wins") : 0;
+var p1WinCount = (localStorage.getItem("p2Wins")) ? localStorage.getItem("p2Wins") : 0;
+
 //render variables
 var pokeCards = document.querySelector("#live-battle");
 var p1StatDisplay = document.getElementById('left-stats');
@@ -281,7 +284,7 @@ function getType(url, url2) {
 
 function setWeather(data) {
     environmentStats = {};
-    environmentStats.weatherType = (data.weather[0].id[0] != 7) ? data.weather[0].main : "Atmosphere";
+    environmentStats.weatherType = (data.weather[0].id.toString()[0] != 7) ? data.weather[0].main : "Atmosphere";
     environmentStats.time = moment(moment.utc()).add(data.timezone, 'seconds').format('H:mm');
     console.log(environmentStats)
     console.log("retrieved weather")
