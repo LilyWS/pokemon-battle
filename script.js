@@ -283,6 +283,7 @@ function setWeather(data) {
     environmentStats = {};
     environmentStats.weatherType = (data.weather[0].id[0] != 7) ? data.weather[0].main : "Atmosphere";
     environmentStats.time = moment(moment.utc()).add(data.timezone, 'seconds').format('H:mm');
+    document.getElementById('time').textContent = moment(moment.utc()).add(data.timezone, 'seconds').format('h:mm a');
     console.log(environmentStats)
     console.log("retrieved weather")
     if (pokemon[0].typeData && pokemon[1].typeData) { //check if both pokemon are loaded
@@ -380,9 +381,8 @@ function battleStep() { //function to process one step of the battle (a turn for
             console.log(`${p2.name} has 0 HP left.`);
             console.log(`${p1.name} had ${p1.cHp} HP left.`);
             clearInterval(battleTimer);
-            if (!p2.cHp == 0) {
-                 document.querySelector('.lose').textContent = 'LOST';
-            }
+            
+            renderOutcome()
             break
         }
         console.log(`${p2.name} is hit for ${dmgVal}!`);
@@ -393,6 +393,13 @@ function battleStep() { //function to process one step of the battle (a turn for
     }
     renderStats();
 
+}
+
+function renderOutcome() {
+    let p1 = pokemon[0];
+    let p2 = pokemon[1];
+    p1StatDisplay.querySelector(".lose").textContent = (p1.cHp>0) ? "WIN" : "LOSE";
+    p2StatDisplay.querySelector(".lose").textContent = (p2.cHp>0) ? "WIN" : "LOSE";
 }
 
 function renderStats() {
