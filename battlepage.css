@@ -469,10 +469,11 @@ progress[value] {
         border-radius: 5px;
     }
     #weather-info {
+        right: 10px;
         width: 150px;
         height: 180px;
         margin-top: 250px;
-        left: 120px;
+        margin-left: 80px;
     }
     #positioning {
         display: inline-block;
@@ -482,7 +483,7 @@ progress[value] {
         height: 200px;
         position: absolute;
         top: 275px;
-        left: 300px;
+        left: 20px;
     }
     #p1Img {
         position: absolute;
@@ -502,10 +503,10 @@ progress[value] {
         width: 150px;
     }
     #left-stats {
-        margin-left: 220px;
+        margin-left: 40px;
     }
     #right-stats {
-        margin-left: 420px;
+        margin-left: 220px;
     }
     .win, 
     .lose {
