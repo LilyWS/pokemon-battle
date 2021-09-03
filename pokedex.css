@@ -1,7 +1,10 @@
 body{
-    background-color: orangered;
-    margin: 0;
-    color: white;
+    background: url(./assets/ashpaul.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
 }
 .card {
     list-style: none;
@@ -44,6 +47,7 @@ body{
 h1 {
     text-align: center;
     font-size: 54px;
+    color: whitesmoke;
 }
 #homepage {
     margin-left: 25px;
