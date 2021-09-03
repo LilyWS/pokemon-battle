@@ -4,8 +4,6 @@ var fetchPokemon = () => {
   for (let i = 1; i < 889; i++){
       var url = `https://pokeapi.co/api/v2/pokemon/${i}`;
       promises.push(fetch(url).then((res) => res.json()));
-      console.log(promises);
-
   };
   
     Promise.all(promises).then((results) => {
@@ -19,7 +17,6 @@ var fetchPokemon = () => {
     });
 };
     var displayPokemon = (pokemon) => {
-        console.log(pokemon);
         var pokemonHTMLString = pokemon.map(pokeman => `
         <li class= "card">
             <img class = "card-img" src="${pokeman.image}"/>

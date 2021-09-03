@@ -1,22 +1,18 @@
-# pokemon-battle
+# PokeBattle Simulator
 Pokemon Battle
 ## Table of Contents
 - Description
-- Contributors
 - Usage
 - Screenshot of Deployment
+- Contact/Collaborators 
+- License
+
 
 ### Description
 The user will be able to battle the selected Pokemon based off the current location of the user. The Pokemon powers and attacks will be influenced by the weather that is occuring in the users current area.
 - Ex: if it is raining in Charlotte,NC, a Squirtle would be a great choice!
 
 The battle continues without the users input, however the user will be able to see the health status of both Pokemon to stay interactive with the battle. 
-
-### Contributors
-Alex Wilson, Lily Sperber, Thurston Cox
-- API'S
-    - PokeAPI
-    - OpenWeather
 
 ### Usage
 - "How to Play" button will be located at the top left of the page, this will take the user to an Instructions page.
@@ -28,3 +24,13 @@ Alex Wilson, Lily Sperber, Thurston Cox
 ### Screenshot
 ![screenshot]
 
+### Contact/Collaborators
+Lily Sperber (lilywsperber@gmail.com)
+Alex Wilson (alexwilson0017@yahoo.com)
+Thurston Cox (thurstoncox3@gmail.com)
+- API'S
+    - PokeAPI
+    - OpenWeather
+
+### License
+Distributed under the MIT License. See `LICENSE` for more information.
