@@ -9,9 +9,10 @@ body{
 .card {
     list-style: none;
     padding: 40px;
-    background-color: rgb(234, 239, 241); 
+    background-color: rgba(255, 255, 255, 0.6); 
     color: rgb(70, 67, 67);
     text-align: center;
+    border-radius: 20px;
 }
 .card:hover {
     transition: text-shadow 0.25s ease, transform 0.25s ease;
@@ -47,9 +48,20 @@ body{
 h1 {
     text-align: center;
     font-size: 54px;
-    color: whitesmoke;
+    color: black;
 }
-#homepage {
+
+#top-page {
+    height: 25px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 0px 0px 2px 0px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 17px 25px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+}
+
+.instructions {
     margin-left: 25px;
     text-decoration: none;
     color: white;
@@ -58,7 +70,7 @@ h1 {
     display: inline-block;
 }
 
-#homepage:hover {
+.instructions:hover {
     color: rgb(238, 129, 129);
     transform: scale(1.05);
     text-shadow: 5px 5px 40px rgb(255, 14, 14);
