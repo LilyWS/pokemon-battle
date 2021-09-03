@@ -121,3 +121,8 @@ h1 {
     transition: all 0.3s ease;
     transform: scale(1.1);
 }
+
+.flip-front-back {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
