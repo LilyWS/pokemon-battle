@@ -36,6 +36,23 @@ body {
     transition: text-shadow 0.25s ease, transform 0.25s ease;
 }
 
+#pokedex {
+    padding-top: 5px;
+    margin-left: 25px;
+    text-decoration: none;
+    color: white;
+    line-height: 40px;
+    font-size: 24px;
+    display: inline-block;
+}
+
+#pokedex:hover {
+    color: rgb(238, 129, 129);
+    transform: scale(1.05);
+    text-shadow: 5px 5px 40px rgb(255, 14, 14);
+    transition: text-shadow 0.25s ease, transform 0.25s ease;
+}
+
 #display {
     display: flex;
 }
