@@ -32,8 +32,8 @@
                     
                         <input id="left-input" type="text" value="" name="p1" placeholder="Choose Player 1">
                         <input id="right-input" type="text" value="" name="p2" placeholder="Choose Player 2">
-                        <img id="left-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/7.png"/>
-                        <img id="right-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"/>
+                        <img id="left-img"/>
+                        <img id="right-img"/>
                     
                 </div>
             <button type="submit" id="btn-fight">Fight!</button>    
@@ -44,6 +44,32 @@
 
     </main>
 
+    <script>
+        //get random pokeimages 
+
+        var pokeURL1 = `https://pokeapi.co/api/v2/pokemon/${Math.round(Math.random()*800+1)}/`;
+        var pokeURL2 = `https://pokeapi.co/api/v2/pokemon/${Math.round(Math.random()*800+1)}/`;
+
+        function getPokemon(url, url2) {
+            fetch(url)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    document.querySelector('#left-img').setAttribute('src', data.sprites.front_default)
+                    document.querySelector('#left-img').setAttribute("class", "flip-front-back")
+                });
+            fetch(url2)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    document.querySelector('#right-img').setAttribute('src', data.sprites.front_default)
+                });
+        }
+
+        getPokemon(pokeURL1, pokeURL2)
+    </script>
     <script src="script.js"></script>
 </body>
 
