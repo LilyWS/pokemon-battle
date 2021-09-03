@@ -8,8 +8,8 @@ var parameters = new URLSearchParams(window.location.search);
 var weatherAPIKey = 'e93a9a6062496e0d1483164567d29081';
 var city = (parameters.get("loc")) ? parameters.get("loc").toLowerCase() : "Charlotte";
 //TODO: account for spaces by adding hyphens (tapu lele)
-var pokemon1 = (parameters.get("p1")) ? parameters.get("p1").toLowerCase() : "squirtle";
-var pokemon2 = (parameters.get("p2")) ? parameters.get("p2").toLowerCase() : "bulbasaur";
+var pokemon1 = (parameters.get("p1")) ? parameters.get("p1").replace(/\W+/g, '-').toLowerCase() : "squirtle";
+var pokemon2 = (parameters.get("p2")) ? parameters.get("p2").replace(/\W+/g, '-').toLowerCase() : "bulbasaur";
 
 var weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPIKey}`;
 var environmentStats = null;
