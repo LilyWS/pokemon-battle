@@ -398,6 +398,14 @@ function battleStep() { //function to process one step of the battle (a turn for
 
 }
 
+function resetWins() {
+    localStorage.setItem("p1Wins", 0);
+    localStorage.setItem("p2Wins", 0);
+    pokemon[0].winCnt = 0;
+    pokemon[1].winCnt = 0;
+    renderStats();
+}
+
 var p1Img = document.getElementById('p1Img');
 var p2Img = document.getElementById('p2Img');
 
