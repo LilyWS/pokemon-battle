@@ -18,9 +18,6 @@ var pokemon = []; //will contain objects representing pokemon 1 and 2
 var pokeURL1 = `https://pokeapi.co/api/v2/pokemon/${pokemon1}/`;
 var pokeURL2 = `https://pokeapi.co/api/v2/pokemon/${pokemon2}/`;
 
-var p1WinCount = (localStorage.getItem("p1Wins")) ? localStorage.getItem("p1Wins") : 0;
-var p1WinCount = (localStorage.getItem("p2Wins")) ? localStorage.getItem("p2Wins") : 0;
-
 //render variables
 var pokeCards = document.querySelector("#live-battle");
 var p1StatDisplay = document.getElementById('left-stats');
@@ -338,6 +335,8 @@ the damgage given will follow the following formula:
 function initBattle() { //set up the battle 
     let p1 = pokemon[0];
     let p2 = pokemon[1];
+    p1.winCnt = (localStorage.getItem("p1Wins")) ? localStorage.getItem("p1Wins") : 0;
+    p2.winCnt = (localStorage.getItem("p2Wins")) ? localStorage.getItem("p2Wins") : 0;
     order = (p1.spd > p2.spd) ? [p1, p2] : [p2, p1];
     //determine what stat the pokemon will attack and defend with
     p1.using = (p1.sAtk > p1.atk) ? 'sAtk' : 'atk';
@@ -384,6 +383,7 @@ function battleStep() { //function to process one step of the battle (a turn for
             console.log(`${p2.name} has 0 HP left.`);
             console.log(`${p1.name} had ${p1.cHp} HP left.`);
             clearInterval(battleTimer);
+            p1.winCnt += 1;
             
             renderOutcome()
             break
@@ -401,6 +401,8 @@ function battleStep() { //function to process one step of the battle (a turn for
 function renderOutcome() {
     let p1 = pokemon[0];
     let p2 = pokemon[1];
+    localStorage.setItem("p1Wins", p1.winCnt);
+    localStorage.setItem("p2Wins", p2.winCnt);
     p1StatDisplay.querySelector(".lose").textContent = (p1.cHp>0) ? "WIN" : "LOSE";
     p2StatDisplay.querySelector(".lose").textContent = (p2.cHp>0) ? "WIN" : "LOSE";
 }
