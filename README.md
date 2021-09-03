@@ -7,6 +7,8 @@ Pokemon Battle
 - Contact/Collaborators 
 - License
 
+- [Link to live deployed site](https://lilyws.github.io/pokemon-battle/index.html)
+- [Link to github repo](https://github.com/LilyWS/pokemon-battle)
 
 ### Description
 The user will be able to battle the selected Pokemon based off the current location of the user. The Pokemon powers and attacks will be influenced by the weather that is occuring in the users current area.
