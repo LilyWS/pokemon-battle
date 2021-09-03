@@ -22,7 +22,7 @@ The battle continues without the users input, however the user will be able to s
 - Once provided with the outcome of the users battle, Local Storage will keep track of and display how many times each seclection has won/lost. 
 
 ### Screenshot
-![screenshot]
+![screenshot](./assets/ss.jpg)
 
 ### Contact/Collaborators
 Lily Sperber (lilywsperber@gmail.com)
