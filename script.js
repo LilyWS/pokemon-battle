@@ -230,7 +230,6 @@ function getWeather(url) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             cityName.textContent = data.name;
             cityTemp.textContent = parseInt(data.main.temp) + "°";
             var icon = data.weather[0].icon;
@@ -247,7 +246,6 @@ function getPokemon(url, url2) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             createPokemon(data, 0);
         });
     fetch(url2)
@@ -255,7 +253,6 @@ function getPokemon(url, url2) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             createPokemon(data, 1);
         });
 }
@@ -286,8 +283,6 @@ function setWeather(data) {
     environmentStats.weatherType = (data.weather[0].id.toString()[0] != 7) ? data.weather[0].main : "Atmosphere";
     environmentStats.time = moment(moment.utc()).add(data.timezone, 'seconds').format('H:mm');
     document.getElementById('time').textContent = moment(moment.utc()).add(data.timezone, 'seconds').format('h:mm a');
-    console.log(environmentStats)
-    console.log("retrieved weather")
     if (pokemon[0].typeData && pokemon[1].typeData) { //check if both pokemon are loaded
         initBattle()
     }
@@ -347,7 +342,6 @@ function initBattle() { //set up the battle
     p1.defWith = (p2.using == 'sAtk') ? p1.sDef : p1.def;
     //determine how type will multiply their attacks
     while(environmentStats == {}){
-        console.log("wating");
     }
     p1.atkMult = getAtkMult(p1.typeData.damage_relations, p2.type) * getWeatherMult(p1.type);
     p2.atkMult = getAtkMult(p2.typeData.damage_relations, p1.type) * getWeatherMult(p2.type);
@@ -381,17 +375,12 @@ function battleStep() { //function to process one step of the battle (a turn for
         p2.cHp = Math.round((p2.cHp - dmgVal*2.5) * 10) / 10; //we round health to tenths place because javascript sucks at floating point numbers
 
         if (p2.cHp < .1) {
-            console.log(`${p2.name} is hit for ${dmgVal} and faints!`);
-            console.log(`${p2.name} has 0 HP left.`);
-            console.log(`${p1.name} had ${p1.cHp} HP left.`);
             clearInterval(battleTimer);
             p1.winCnt += 1;
             
             renderOutcome()
             break
         }
-        console.log(`${p2.name} is hit for ${dmgVal}!`);
-        console.log(`They have ${p2.cHp} HP left!`);
 
     }
     renderStats();
@@ -440,7 +429,6 @@ function renderStats() {
 }
 
 function renderPokemon() {
-    console.log(pokemon);
     renderStats();
 
     //render image to Battle
