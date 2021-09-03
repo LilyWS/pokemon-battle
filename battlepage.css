@@ -72,18 +72,15 @@ h1 {
     margin-left: 50px;  
     border-radius: 5px;
     border: 1px solid black;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 #left-input:hover, 
 #right-input:hover,
 #city-finder:hover {
     box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.6);
-}
-
-#left input, #right input{
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 20px;
 }
 
 #btn-fight {
@@ -251,3 +248,203 @@ progress[value] {
     width: 100px;
 }
 
+@media screen and (max-width: 1300px) {
+   #weather-info {
+        right: 20px;
+    }
+    #left-stats {
+        margin-left: 50px;
+    }
+    #right-stats {
+        margin-right: 50px;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    #left-stats {
+        margin-left: 20px;
+    }
+    #right-stats {
+        margin-right: 20px;
+    }
+    #weather-info {
+        width: 180px;
+        margin-right: 15px;
+    }
+    #icon {
+        margin-left: 40px;
+        width: 100px;
+    }
+    #container {
+        width: 600px;
+    }
+    #inner-container {
+        margin-top: 20px;
+        width: 500px;
+        display: inline-block;
+    }
+    #left-input, #right-input {
+        font-size: 20px;
+        margin-left: 180px;
+    }
+    #city-finder {
+        left: 25%;
+    }
+    #btn-fight {
+        position: relative;
+        left: 0%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #container {
+        height: 100px;
+        width: 600px;
+        margin-left: 20px;
+        margin-top: 50px;
+    }
+    h1 {
+        font-size: 20px;
+        margin: 0 10px 10px 10px;
+    }
+    #city-finder {
+        width: 200px;
+        font-size: 16px;
+        left: 32%;
+    }
+    #left-input, #right-input {
+        margin-left: 50px;  
+        font-size: 16px;
+        width: 200px;
+    }
+    #right-input {
+        position: absolute;
+        left: 250px;
+    }
+    #btn-fight {
+        top: -10px;
+    }
+    #positioning {
+        margin-top: 100px;
+        width: 900px;
+        justify-content: center;
+        margin-left: -35px;
+    }
+    #live-battle {
+        width: 400px;
+    }
+    #weather-info {
+        width: 150px;
+        height: 180px;
+        margin-top: 50px;
+        left: 640px;
+    }
+    #temp {
+        font-size: 28px;
+    }
+    #icon {
+        width: 50px;
+        margin-left: 45px;
+    }
+    #p1Img {
+        top: 150px;
+        left: 15px;
+    }
+    #p2Img {
+        top: -170px;
+        left: 200px;
+    }
+    #left-stats, 
+    #right-stats {
+        margin-top: 50px;
+        height: 250px;
+        width: 150px;
+    }
+    #left-stats {
+        margin-left: 70px;
+    }
+    #right-stats {
+        margin-right: 70px;
+    }
+    progress[value] {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #container {
+        height: 150px;
+        width: 400px;
+        margin: auto;
+        margin-top: 50px;
+
+    }
+    h1 {
+        font-size: 20px;
+        margin: 0 10px 10px 10px;
+    }
+    #city-finder {
+        width: 200px;
+        font-size: 16px;
+        left: 25%;
+    }
+    #left-input, #right-input {
+        margin-left: 20%;  
+        font-size: 16px;
+        width: 200px;
+    }
+    #right-input {
+        position: relative;
+        left: 0%;
+    }
+    #btn-fight {
+        top: -50px;
+        left: 315px;
+        padding: 5px;
+        font-size: 18px;
+        border-radius: 5px;
+    }
+    #weather-info {
+        width: 150px;
+        height: 180px;
+        margin-top: 250px;
+        left: 120px;
+    }
+    #positioning {
+        display: inline-block;
+    }
+    #live-battle {
+        width: 300px;
+        height: 200px;
+        position: absolute;
+        top: 275px;
+        left: 300px;
+    }
+    #p1Img {
+        position: absolute;
+        margin-top: -75px;
+        width: 130px;
+    }
+    #p2Img {
+        position: absolute;
+        margin-top: 160px;
+        width: 130px;
+    }
+    #left-stats, 
+    #right-stats {
+        position: absolute;
+        margin-top: 150px;
+        height: 210px;
+        width: 150px;
+    }
+    #left-stats {
+        margin-left: 220px;
+    }
+    #right-stats {
+        margin-left: 420px;
+    }
+}
+
+@media screen and (min-width: 640px) {
+
+}

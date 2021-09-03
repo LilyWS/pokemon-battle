@@ -25,7 +25,7 @@ var p2StatDisplay = document.getElementById('right-stats');
 var p1Name = p1StatDisplay.querySelector("#left-pokemon-name");
 var p2Name = p2StatDisplay.querySelector("#right-pokemon-name");
 var p1HealthBar = p1StatDisplay.querySelector(".health-bar");
-var p2HealthBar =  p2StatDisplay.querySelector(".health-bar");
+var p2HealthBar = p2StatDisplay.querySelector(".health-bar");
 
 //order is the same as pokemon array but order by speed instead of player. pokemon is used for rendering and order for logic
 var order = [];//order in which pokemon will take turns
@@ -359,7 +359,7 @@ function getAtkMult(dmgRelations, targetType) {
     } else if (dmgRelations.no_damage_to.some(e => e.name === targetType)) {
         return (.25);
     } else {
-        return(1);
+        return (1);
     }
 }
 
@@ -372,16 +372,24 @@ function battleStep() { //function to process one step of the battle (a turn for
         let p1 = order[i]; //in this context p1 is the currently attacking pokemon and p2 is the defending one
         let p2 = (i) ? order[0] : order[1];
         let dmgVal = Math.round(((p1[p1.using] / (p2.defWith * p2.defMult)) * (Math.random() * .15 + .85) * p1.atkMult) * 10) / 10 //we round damage to one decimal place
-        p2.cHp = Math.round((p2.cHp - dmgVal) * 10) / 10; //we round health to tenths place because javascript sucks at floating point numbers
+
+        p2.cHp = Math.round((p2.cHp - dmgVal*2.5) * 10) / 10; //we round health to tenths place because javascript sucks at floating point numbers
 
         if (p2.cHp < .1) {
             console.log(`${p2.name} is hit for ${dmgVal} and faints!`);
+            console.log(`${p2.name} has 0 HP left.`);
             console.log(`${p1.name} had ${p1.cHp} HP left.`);
             clearInterval(battleTimer);
-            break;
+            if (!p2.cHp == 0) {
+                 document.querySelector('.lose').textContent = 'LOST';
+            }
+            break
         }
         console.log(`${p2.name} is hit for ${dmgVal}!`);
-        console.log(`The have ${p2.cHp} HP left!`);
+        console.log(`They have ${p2.cHp} HP left!`);
+        // document.getElementById('attack1').textContent = `HP Remaining: ${p2.cHp}`;
+
+
     }
     renderStats();
 
