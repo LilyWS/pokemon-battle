@@ -106,6 +106,7 @@ h1 {
     transform: scale(1.1);
 }
 
+
 @media screen and (max-width: 800px) {
     #container {
         width: 450px;
@@ -133,4 +134,9 @@ h1 {
         position: relative;
         left: 40%;
     }
+
+.flip-front-back {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+
 }
