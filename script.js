@@ -395,11 +395,19 @@ function battleStep() { //function to process one step of the battle (a turn for
 
 }
 
+var p1Img = document.getElementById('p1Img');
+var p2Img = document.getElementById('p2Img');
+
 function renderOutcome() {
     let p1 = pokemon[0];
     let p2 = pokemon[1];
     p1StatDisplay.querySelector(".lose").textContent = (p1.cHp>0) ? "WIN" : "LOSE";
     p2StatDisplay.querySelector(".lose").textContent = (p2.cHp>0) ? "WIN" : "LOSE";
+    if (p1.cHp<0) {
+        p1Img.setAttribute('class', 'ko');
+    } else {
+        p2Img.setAttribute('class', 'ko');
+    }
 }
 
 function renderStats() {
