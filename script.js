@@ -27,6 +27,8 @@ var p2Name = p2StatDisplay.querySelector("#right-pokemon-name");
 var p1HealthBar = p1StatDisplay.querySelector(".health-bar");
 var p2HealthBar = p2StatDisplay.querySelector(".health-bar");
 
+var winLossDisplay = document.querySelector("#wl-stats");
+
 //order is the same as pokemon array but order by speed instead of player. pokemon is used for rendering and order for logic
 var order = [];//order in which pokemon will take turns
 var battleTimer;
@@ -335,8 +337,8 @@ the damgage given will follow the following formula:
 function initBattle() { //set up the battle 
     let p1 = pokemon[0];
     let p2 = pokemon[1];
-    p1.winCnt = (localStorage.getItem("p1Wins")) ? localStorage.getItem("p1Wins") : 0;
-    p2.winCnt = (localStorage.getItem("p2Wins")) ? localStorage.getItem("p2Wins") : 0;
+    p1.winCnt = (localStorage.getItem("p1Wins")) ? parseInt(localStorage.getItem("p1Wins"), 10) : 0;
+    p2.winCnt = (localStorage.getItem("p2Wins")) ? parseInt(localStorage.getItem("p2Wins"), 10) : 0;
     order = (p1.spd > p2.spd) ? [p1, p2] : [p2, p1];
     //determine what stat the pokemon will attack and defend with
     p1.using = (p1.sAtk > p1.atk) ? 'sAtk' : 'atk';
@@ -390,8 +392,6 @@ function battleStep() { //function to process one step of the battle (a turn for
         }
         console.log(`${p2.name} is hit for ${dmgVal}!`);
         console.log(`They have ${p2.cHp} HP left!`);
-        // document.getElementById('attack1').textContent = `HP Remaining: ${p2.cHp}`;
-
 
     }
     renderStats();
@@ -416,7 +416,11 @@ function renderOutcome() {
 }
 
 function renderStats() {
+    p1Win = winLossDisplay.querySelector("#p1-wins");
+    p2Win = winLossDisplay.querySelector("#p2-wins");
 
+    p1Win.textContent = pokemon[0].winCnt;
+    p2Win.textContent = pokemon[1].winCnt;
 
     p1Name.textContent = pokemon1.charAt(0).toUpperCase() + pokemon1.slice(1).toLowerCase();
     p2Name.textContent = pokemon2.charAt(0).toUpperCase() + pokemon2.slice(1).toLowerCase();
